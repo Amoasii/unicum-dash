@@ -1,0 +1,20 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Аппараты</title>
+<style>body{margin:0;font:15px -apple-system,Segoe UI,Roboto,sans-serif;color:#8a8f98;display:flex;align-items:center;justify-content:center;height:100vh;text-align:center;padding:0 16px}</style>
+</head>
+<body>
+<div id="m">Открываю дашборд…</div>
+<script>
+// Постоянный вход в дашборд: адрес туннеля меняется, актуальный лежит в url.json.
+// Telegram передаёт данные входа в #hash — переносим их как есть.
+fetch('url.json?t=' + Date.now(), { cache: 'no-store' })
+  .then(r => r.json())
+  .then(j => location.replace(j.url + location.search + location.hash))
+  .catch(() => { document.getElementById('m').textContent = 'Дашборд сейчас недоступен, попробуйте через минуту.'; });
+</script>
+</body>
+</html>
